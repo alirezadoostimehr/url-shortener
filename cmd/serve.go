@@ -35,7 +35,6 @@ Flag:
 			}
 		},
 	}
-	configPath string
 )
 
 func init() {
