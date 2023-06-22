@@ -5,7 +5,8 @@ import (
 )
 
 type Config struct {
-	DB Database
+	DB     Database
+	Server Server
 }
 
 type Database struct {
@@ -15,6 +16,11 @@ type Database struct {
 	DB       string
 	Username string
 	Password string
+}
+
+type Server struct {
+	Host string
+	Port string
 }
 
 func Init(filePath, fileType string) (*Config, error) {
@@ -33,6 +39,10 @@ func Init(filePath, fileType string) (*Config, error) {
 			Username: viper.GetString("database.username"),
 			Password: viper.GetString("database.password"),
 			DB:       viper.GetString("database.db"),
+		},
+		Server: Server{
+			Host: viper.GetString("server:host"),
+			Port: viper.GetString("server:port"),
 		},
 	}, nil
 }
