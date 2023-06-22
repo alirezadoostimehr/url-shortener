@@ -11,7 +11,7 @@ type Config struct {
 type Database struct {
 	Driver   string
 	Host     string
-	Port     int
+	Port     string
 	DB       string
 	Username string
 	Password string
@@ -29,7 +29,7 @@ func Init(filePath, fileType string) (*Config, error) {
 		DB: Database{
 			Driver:   viper.GetString("database.driver"),
 			Host:     viper.GetString("database.host"),
-			Port:     viper.GetInt("database.port"),
+			Port:     viper.GetString("database.port"),
 			Username: viper.GetString("database.username"),
 			Password: viper.GetString("database.password"),
 			DB:       viper.GetString("database.db"),
