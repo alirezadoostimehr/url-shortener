@@ -11,7 +11,7 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "url-shortener",
-	Short: "A brief description of your application",
+	Short: "Nothing but an url shortener",
 	Long: `Nothing but a little project to make a url shortener for fun.
 
 For using first run migrate command and then run serve and enjoy it. :)`,
