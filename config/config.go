@@ -41,8 +41,8 @@ func Init(filePath, fileType string) (*Config, error) {
 			DB:       viper.GetString("database.db"),
 		},
 		Server: Server{
-			Host: viper.GetString("server:host"),
-			Port: viper.GetString("server:port"),
+			Host: viper.GetString("server.host"),
+			Port: viper.GetString("server.port"),
 		},
 	}, nil
 }

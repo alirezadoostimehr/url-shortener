@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 	"url-shortener/config"
 	"url-shortener/database"
+	"url-shortener/http/handler"
 )
 
 var (
@@ -22,12 +23,19 @@ Flag:
 				panic(err)
 			}
 
-			_, err = database.Init(cfg.DB)
+			db, err := database.Init(cfg.DB)
 			if err != nil {
 				panic(err)
 			}
 
 			e := echo.New()
+
+			sbmt := handler.Submit{DB: db}
+			e.POST("/submit", sbmt.SubmitHandler)
+
+			rcv := handler.Receive{DB: db}
+			//e.HEAD("/receive/", rcv.ReceiveHandler)
+			e.Any("/receive/:", rcv.ReceiveHandler)
 
 			err = e.Start(cfg.Server.Host + ":" + cfg.Server.Port)
 			if err != nil {
