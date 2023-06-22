@@ -52,7 +52,7 @@ Flags:
 				dbCfg.Host,
 				dbCfg.Port,
 				dbCfg.DB)
-			db, err := sql.Open("mysql", dataSourceName)
+			db, err := sql.Open(dbCfg.Driver, dataSourceName)
 			if err != nil {
 				panic(err)
 			}
@@ -76,6 +76,10 @@ Flags:
 			} else {
 				err = m.Down()
 			}
+
+			if err != nil {
+				panic(err)
+			}
 		},
 	}
 	action          string
@@ -84,8 +88,8 @@ Flags:
 )
 
 func init() {
-	rootCmd.AddCommand(migrateCmd)
 	migrateCmd.Flags().StringVar(&configPath, "config", "./config", "set config path")
 	migrateCmd.Flags().StringVar(&action, "action", "", "set action (either up or down)")
 	migrateCmd.Flags().StringVar(&migrationFolder, "folder", "./migrations", "set migration files folder")
+	rootCmd.AddCommand(migrateCmd)
 }
